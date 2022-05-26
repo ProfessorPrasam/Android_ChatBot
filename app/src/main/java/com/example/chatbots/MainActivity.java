@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView chatsRV;
     private EditText userMsgEdt;
     private FloatingActionButton sendMsgFAB;
-    private final String USER_KEY = "user";
     private final String BOT_KEY = "bot";
-    private ArrayList<ChatsModle>chatsModleArrayList;
+    private final String USER_KEY = "user";
+    private ArrayList<ChatsModal>chatsModalArrayList;
     private ChatRVAdapter chatRVAdapter;
 //    TextView textView = findViewById(R.id.textView);
 
@@ -38,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         chatsRV = findViewById(R.id.idRVChats);
         userMsgEdt = findViewById(R.id.idEdtMessage);
         sendMsgFAB = findViewById(R.id.idFABSend);
-        chatsModleArrayList = new ArrayList<>();
-        chatRVAdapter = new ChatRVAdapter(chatsModleArrayList,this);
+        chatsModalArrayList = new ArrayList<>();
+        chatRVAdapter = new ChatRVAdapter(chatsModalArrayList,this);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         chatsRV.setLayoutManager(manager);
         chatsRV.setAdapter(chatRVAdapter);
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void getResponse(String message) {
-        chatsModleArrayList.add(new ChatsModle(message,USER_KEY));
+        chatsModalArrayList.add(new ChatsModal(message,USER_KEY));
         chatRVAdapter.notifyDataSetChanged();
         String url = "http://api.brainshop.ai/get?bid=166782&key=bL9YDyiipDtx8bKL&uid=[uid]&msg="+message;
         String BASE_URL="http://api.brainshop.ai/";
@@ -65,21 +64,21 @@ public class MainActivity extends AppCompatActivity {
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        RetroFitAPI retroFitAPI = retrofit.create(RetroFitAPI.class);
-        Call<MsgModle> call = retroFitAPI.getMessage(url);
-        call.enqueue(new Callback<MsgModle>() {
+        RetrofitAPI retrofitAPI = retrofit.create(RetrofitAPI.class);
+        Call<MsgModal> call = retrofitAPI.getMessage(url);
+        call.enqueue(new Callback<MsgModal>() {
             @Override
-            public void onResponse(Call<MsgModle> call, Response<MsgModle> response) {
+            public void onResponse(Call<MsgModal> call, Response<MsgModal> response) {
                 if(response.isSuccessful()){
-                    MsgModle modle = response.body();
-                    chatsModleArrayList.add(new ChatsModle(modle.getCnt(),BOT_KEY));
+                    MsgModal modal = response.body();
+                    chatsModalArrayList.add(new ChatsModal(modal.getCnt(),BOT_KEY));
                     chatRVAdapter.notifyDataSetChanged();
                 }
             }
 
             @Override
-            public void onFailure(Call<MsgModle> call, Throwable t) {
-                chatsModleArrayList.add(new ChatsModle("Enter correct command",BOT_KEY));
+            public void onFailure(Call<MsgModal> call, Throwable t) {
+                chatsModalArrayList.add(new ChatsModal("Enter correct command",BOT_KEY));
                 chatRVAdapter.notifyDataSetChanged();
             }
         });

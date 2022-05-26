@@ -1,6 +1,6 @@
 package com.example.chatbots;
 
-public class MsgModle {
+public class MsgModal {
 
     private String cnt;
 
@@ -12,7 +12,7 @@ public class MsgModle {
         this.cnt = cnt;
     }
 
-    public MsgModle(String cnt){
+    public MsgModal(String cnt){
         this.cnt = cnt;
     }
 }

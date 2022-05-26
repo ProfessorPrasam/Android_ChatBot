@@ -1,8 +1,7 @@
 package com.example.chatbots;
 
-public class ChatsModle {
+public class ChatsModal {
 
-    // string to store our message and sender
     private String message;
     private String sender;
 
@@ -21,7 +20,7 @@ public class ChatsModle {
     public void setSender(String sender) {
         this.sender = sender;
     }
-    public ChatsModle(String message, String sender){
+    public ChatsModal(String message, String sender){
         this.message = message;
         this.sender = sender;
     }

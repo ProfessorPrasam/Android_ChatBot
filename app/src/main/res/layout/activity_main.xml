@@ -17,7 +17,9 @@
     <RelativeLayout
         android:id="@+id/idRLMsg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true">
+
 
         <EditText
             android:id="@+id/idEdtMessage"
@@ -47,9 +49,9 @@
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="0dp"
             android:src="@drawable/ic_send"
-            app:backgroundTint="@color/fab_color"
+            app:backgroundTint="@color/white"
             app:fabCustomSize="45dp"
-            app:tint="@color/white" />
+            app:tint="@color/black" />
 
-    he</RelativeLayout>
+    </RelativeLayout>
 </RelativeLayout>

@@ -5,25 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class ChatRVAdapter extends RecyclerView.Adapter {
-//    TextView textView;
 
-    private ArrayList<ChatsModle> chatsModleArrayList;
-    private Context context;
+    private final ArrayList<ChatsModal> chatsModalArrayList;
 
-    public ChatRVAdapter(ArrayList<ChatsModle> chatsModleArrayList, Context context) {
-        this.chatsModleArrayList = chatsModleArrayList;
-        this.context = context;
+    public ChatRVAdapter(ArrayList<ChatsModal> chatsModalArrayList, Context context) {
+        this.chatsModalArrayList = chatsModalArrayList;
     }
 
     @NonNull
@@ -44,32 +36,32 @@ public class ChatRVAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ChatsModle chatsModle = chatsModleArrayList.get(position);
-        switch (chatsModle.getSender()){
+        ChatsModal chatsModal = chatsModalArrayList.get(position);
+        switch (chatsModal.getSender()){
             case "user":
-                ((UserViewHolder)holder).userTV.setText(chatsModle.getMessage());
+                ((UserViewHolder)holder).userTV.setText(chatsModal.getMessage());
                 break;
             case "bot":
-                ((BotViewHolder)holder).botMsgTV.setText(chatsModle.getMessage());
+                ((BotViewHolder)holder).botMsgTV.setText(chatsModal.getMessage());
                 break;
         }
     }
 
     @Override
     public int getItemViewType(int position) {
-        switch (chatsModleArrayList.get(position).getSender()){
+        switch (chatsModalArrayList.get(position).getSender()){
             case "user":
                 return 0;
             case "bot":
-                return 1;
+                return  1;
             default:
-                return -1;
+                return  -1;
         }
     }
 
     @Override
     public int getItemCount() {
-        return chatsModleArrayList.size();
+        return chatsModalArrayList.size();
     }
 
     public static class UserViewHolder extends RecyclerView.ViewHolder {
